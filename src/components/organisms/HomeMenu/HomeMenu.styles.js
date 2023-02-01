@@ -2,17 +2,19 @@ import styled from "styled-components"
 
 export const ContentContainer = styled.div`
     padding-inline: 10%;
-    display: grid;
-    grid-template-columns: auto auto;
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
     gap: 5vw 6vw;
-    width: 70%;
+    width: 80%;
+    margin-top: 20px;
     margin-inline: auto;
 `
 
 export const MenuNode = styled.div`
     background: white;
-    width: 100%;
-    aspect-ratio: 1/1;
+    width: 140px;
+    height: 140px;
     border-radius: 5px;
     box-shadow: 0 2px 4px 1px darkgrey;
     display: flex;
@@ -20,8 +22,13 @@ export const MenuNode = styled.div`
     align-items: center;
     justify-content: flex-start;
     row-gap: 20px;
+    cursor: pointer;
+    transition: transform 0.3s;
     > * {
         max-width: 80%;
+    }
+    :hover {
+        transform: scale(1.1);
     }
 `
 

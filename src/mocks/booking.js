@@ -1,13 +1,49 @@
 export const Doctors = [
-    { name: "Ellie" },
-    { name: "Gary" },
-    { name: "Tooraj" },
-    { name: "Susan" },
-    { name: "Elaine" },
-    { name: "Darren" },
-    { name: "Michael" },
-    { name: "Liu" },
-    { name: "Simon" },
+    {
+        name: "Ellie",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/female1.jpeg`,
+        details: `Available from: Today!`,
+    },
+    {
+        name: "Gary",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/male1.jpeg`,
+        details: `Available from: Fri, 3 Feb`,
+    },
+    {
+        name: "Tooraj",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/male1.jpeg`,
+        details: `Available from: Thu, 2 Feb`,
+    },
+    {
+        name: "Susan",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/female1.jpeg`,
+        details: `Available from: Monday, 6 Feb`,
+    },
+    {
+        name: "Elaine",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/female1.jpeg`,
+        details: `Available from: Today!`,
+    },
+    {
+        name: "Darren",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/male1.jpeg`,
+        details: `Available from: Today!`,
+    },
+    {
+        name: "Michael",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/male1.jpeg`,
+        details: `Available from: Today!`,
+    },
+    {
+        name: "Liu",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/female1.jpeg`,
+        details: `Available from: Today!`,
+    },
+    {
+        name: "Simon",
+        profile: `https://staticsite2derek.s3.ap-southeast-2.amazonaws.com/images/male1.jpeg`,
+        details: `Available from: Today!`,
+    },
 ]
 
 export const Instructions = {

@@ -69,6 +69,15 @@ export const DoctorsListContainer = styled.div`
     width: 100%;
 `
 
+export const DoctorsList = styled.div`
+    display: flex;
+    flex-direction: column;
+    padding-top: 14px;
+    padding-bottom: 14px;
+    width: 98%;
+    margin-inline: auto;
+`
+
 export const DoctorsListTitle = styled.div`
     min-height: 35px;
     color: white;
@@ -77,4 +86,43 @@ export const DoctorsListTitle = styled.div`
     border-radius: 5px 5px 0 0;
     align-items: center;
     justify-content: center;
+`
+
+export const DoctorNode = styled.div`
+    display: flex;
+    gap: 14px;
+    padding: 10px 21px;
+    user-select: none;
+    cursor: pointer;
+    transition: 0.2s;
+    border-radius: 3px;
+    :hover {
+        box-shadow: 0 0 4px 1px grey;
+        transform: scale(1.01);
+    }
+`
+
+export const DoctorProfileContainer = styled.div`
+    width: 35px;
+    height: 35px;
+    > img {
+        height: 100%;
+        width: 100%;
+        border-radius: 50%;
+        object-fit: cover;
+    }
+`
+
+export const DoctorTextSecion = styled.div`
+    width: 100%;
+`
+
+export const DoctorName = styled.p`
+    font-weight: 600;
+    margin: 0;
+`
+
+export const DoctorDetails = styled.p`
+    font-weight: 600;
+    margin: 0;
 `
