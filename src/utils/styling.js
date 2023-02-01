@@ -6,7 +6,7 @@ export const mq = (size) => {
         }
     }
     return {
-        up: `@media (width >= ${size})`,
-        down: `@media (width < ${size})`,
+        up: `@media (width >= ${size}px)`,
+        down: `@media (width < ${size}px)`,
     }
 }

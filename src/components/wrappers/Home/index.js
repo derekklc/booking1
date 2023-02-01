@@ -6,7 +6,10 @@ import { sectionId } from "../../../reactiveVariables"
 
 import HomeMenu from "../../organisms/HomeMenu"
 import Booking from "../Booking"
+import AboutUs from "../About"
+import Products from "../Products"
 import { PageNames } from "../../../constants"
+import ContactUs from "../Contact"
 
 const renderHome = () => {
     return (
@@ -23,6 +26,18 @@ const renderBooking = () => {
     return <Booking />
 }
 
+const renderAbout = () => {
+    return <AboutUs />
+}
+
+const renderProducts = () => {
+    return <Products />
+}
+
+const renderContact = () => {
+    return <ContactUs />
+}
+
 const Home = () => {
     const currentSection = useReactiveVar(sectionId)
     console.log("currentSection", currentSection)
@@ -32,7 +47,17 @@ const Home = () => {
     if (currentSection === PageNames.Bookings) {
         return renderBooking()
     }
-    return <>default</>
+    if (currentSection === PageNames.About) {
+        return renderAbout()
+    }
+    if (currentSection === PageNames.Products) {
+        return renderProducts()
+    }
+    if (currentSection === PageNames.Contact) {
+        return renderContact()
+    }
+
+    return renderHome()
 }
 
 export default Home
