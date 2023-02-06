@@ -11,14 +11,19 @@ import Products from "../Products"
 import { PageNames } from "../../../constants"
 import ContactUs from "../Contact"
 
+import Facade from "../../molecules/Facade"
+
 const renderHome = () => {
     return (
-        <S.ContentContainer>
-            <S.Title>HerbCure Medical</S.Title>
-            <S.LogoContainer>MyLogo</S.LogoContainer>
-            <S.BGCircle />
-            <HomeMenu />
-        </S.ContentContainer>
+        <div>
+            <Facade />
+            <S.ContentContainer>
+                <S.Title>HerbCure Medical</S.Title>
+                <S.LogoContainer>MyLogo</S.LogoContainer>
+                <S.BGCircle />
+                <HomeMenu />
+            </S.ContentContainer>
+        </div>
     )
 }
 
