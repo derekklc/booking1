@@ -13,17 +13,21 @@ import ContactUs from "../Contact"
 
 import Facade from "../../molecules/Facade"
 
+const renderFacade = () => {
+    setTimeout(() => {
+        sectionId(PageNames.Home)
+    }, 1800)
+    return <Facade />
+}
+
 const renderHome = () => {
     return (
-        <div>
-            <Facade />
-            <S.ContentContainer>
-                <S.Title>HerbCure Medical</S.Title>
-                <S.LogoContainer>MyLogo</S.LogoContainer>
-                <S.BGCircle />
-                <HomeMenu />
-            </S.ContentContainer>
-        </div>
+        <S.ContentContainer>
+            <S.Title>HerbCure Medical</S.Title>
+            <S.LogoContainer>MyLogo</S.LogoContainer>
+            <S.BGCircle />
+            <HomeMenu />
+        </S.ContentContainer>
     )
 }
 
@@ -45,7 +49,9 @@ const renderContact = () => {
 
 const Home = () => {
     const currentSection = useReactiveVar(sectionId)
-    console.log("currentSection", currentSection)
+    if (currentSection === PageNames.Start) {
+        return renderFacade()
+    }
     if (!currentSection || currentSection === PageNames.Home) {
         return renderHome()
     }

@@ -4,14 +4,25 @@ import * as S from "./booking.styles"
 
 import { Doctors } from "../../../mocks/booking"
 
-const DoctorsList = () => {
+import { BookingStages } from "../../../constants"
+
+const DoctorsList = ({ updateBookingStage }) => {
+    const goToBookATime = () => {
+        updateBookingStage(BookingStages.BookATime)
+    }
+
     return (
         <S.DoctorsListContainer>
             <S.DoctorsListTitle>Doctors Available</S.DoctorsListTitle>
             <S.DoctorsList>
                 {Doctors.map((person) => {
                     return (
-                        <S.DoctorNode key={person.name}>
+                        <S.DoctorNode
+                            key={person.name}
+                            onClick={() => {
+                                goToBookATime()
+                            }}
+                        >
                             <S.DoctorProfileContainer>
                                 <img src={person.profile} />
                             </S.DoctorProfileContainer>
