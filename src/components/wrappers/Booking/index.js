@@ -10,10 +10,11 @@ import BookATime from "../../organisms/BookATime"
 
 import { Instructions } from "../../../mocks/booking"
 
-import { BookingStages } from "../../../constants"
+import { BookingStages, PageNames } from "../../../constants"
 
 const Booking = () => {
     const [bookingStage, setBookingStage] = useState(BookingStages.Landing)
+    const [doctorId, setDoctorId] = useState("")
 
     const renderLanding = () => {
         return (
@@ -25,19 +26,31 @@ const Booking = () => {
                     <BookingInstructions instructions={Instructions.list} />
                 </S.PageSection>
                 <S.PageSection theme={{ hasPadding: false }}>
-                    <DoctorsList updateBookingStage={setBookingStage} />
+                    <DoctorsList
+                        setDoctorId={setDoctorId}
+                        updateBookingStage={setBookingStage}
+                    />
                 </S.PageSection>
             </>
         )
     }
 
     const renderBookATime = () => {
-        return <BookATime />
+        return <BookATime doctorId={doctorId} />
     }
 
     return (
         <S.ContentContainer>
-            <PageHeaderA title="Online Booking" />
+            <PageHeaderA
+                title="Online Booking"
+                {...(bookingStage === BookingStages.BookATime
+                    ? {
+                          handleClick: () => {
+                              setBookingStage(BookingStages.Landing)
+                          },
+                      }
+                    : {})}
+            />
             {bookingStage === BookingStages.Landing && renderLanding()}
             {bookingStage === BookingStages.BookATime && renderBookATime()}
         </S.ContentContainer>

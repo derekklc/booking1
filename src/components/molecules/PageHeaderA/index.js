@@ -5,12 +5,20 @@ import { PageNames } from "../../../constants"
 
 import * as S from "./pageHeaderA.styles"
 
-const PageHeaderA = ({ title }) => {
+const PageHeaderA = ({ title, goBackTo, handleClick }) => {
+    const isValidPageName =
+        goBackTo && Object.values(PageNames).includes(goBackTo)
     return (
         <S.ContentContainer>
             <S.HeaderLeft
                 onClick={() => {
-                    sectionId(PageNames.Home)
+                    if (handleClick) {
+                        handleClick()
+                    } else if (isValidPageName) {
+                        sectionId(goBackTo)
+                    } else {
+                        sectionId(PageNames.Home)
+                    }
                 }}
             >{`< Back`}</S.HeaderLeft>
             <S.HeaderMiddle>{title || ""}</S.HeaderMiddle>

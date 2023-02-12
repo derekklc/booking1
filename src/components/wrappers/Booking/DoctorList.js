@@ -6,9 +6,12 @@ import { Doctors } from "../../../mocks/booking"
 
 import { BookingStages } from "../../../constants"
 
-const DoctorsList = ({ updateBookingStage }) => {
-    const goToBookATime = () => {
-        updateBookingStage(BookingStages.BookATime)
+const DoctorsList = ({ setDoctorId, updateBookingStage }) => {
+    const goToBookATime = ({ selectedDoctorId }) => {
+        if (selectedDoctorId) {
+            setDoctorId(selectedDoctorId)
+            updateBookingStage(BookingStages.BookATime)
+        }
     }
 
     return (
@@ -20,7 +23,9 @@ const DoctorsList = ({ updateBookingStage }) => {
                         <S.DoctorNode
                             key={person.name}
                             onClick={() => {
-                                goToBookATime()
+                                goToBookATime({
+                                    selectedDoctorId: person.doctoreId,
+                                })
                             }}
                         >
                             <S.DoctorProfileContainer>
