@@ -9,6 +9,7 @@ export const ContentContainer = styled.div`
 
 export const PageSection = styled.div`
     width: 96%;
+    margin-bottom: 14px;
     border-radius: 7px;
     min-height: 200px;
     display: flex;

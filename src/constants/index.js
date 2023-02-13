@@ -10,4 +10,5 @@ export const PageNames = {
 export const BookingStages = {
     Landing: "landing",
     BookATime: "bookATime",
+    ConfirmTime: "confirmTime",
 }

@@ -27,6 +27,7 @@ export const PickerBodySection = styled.div`
     align-items: flex-start;
     width: fit-content;
     margin-inline: auto;
+    width: 100%;
 `
 
 export const DivisionLine = styled.div`
@@ -98,6 +99,8 @@ export const TimePickerContainer = styled.div`
     flex-direction: column;
     justify-content: center;
     margin: 14px 0;
+    max-width: 100%;
+    overflow: auto;
 `
 
 export const SubmitButton = styled.div`

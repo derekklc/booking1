@@ -1,29 +1,29 @@
 import React, { useEffect, useState } from "react"
 
 import TextField from "@mui/material/TextField"
-import dayjs from "dayjs"
+
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
 import { DesktopDatePicker } from "@mui/x-date-pickers/DesktopDatePicker"
 import { MobileDatePicker } from "@mui/x-date-pickers/MobileDatePicker"
-
-import { sectionId } from "../../../reactiveVariables"
-import { PageNames } from "../../../constants"
 
 import Button from "@mui/material/Button"
 import Stack from "@mui/material/Stack"
 
 import { Doctors, BookingContent, DayTimes } from "../../../mocks/booking"
 import { breakpoints } from "../../../constants/breakpoints"
+import { BookingStages } from "../../../constants"
 
 import * as S from "./BookATime.styles"
 
-const BookATime = ({ doctorId }) => {
-    const tmr = new Date(
-        new Date().setDate(new Date().getDate() + 1)
-    ).toISOString()
-    const [selectedDate, setSelectedDate] = useState(dayjs(tmr))
-    const [selectedTimeId, setSelectedTimeId] = useState("")
+const BookATime = ({
+    doctorId,
+    updateBookingStage,
+    selectedDate,
+    setSelectedDate,
+    selectedTimeId,
+    setSelectedTimeId,
+}) => {
     // dayjs("2015-08-18")
     const initialIsMobile =
         !!window?.innerWidth && window.innerWidth <= breakpoints.mdUp
@@ -32,7 +32,9 @@ const BookATime = ({ doctorId }) => {
         setSelectedDate(newValue)
     }
 
-    const doctorProfile = Doctors.find((person) => person.doctoreId == doctorId)
+    const doctorProfile = Doctors.find(
+        (person) => person.doctoreId === doctorId
+    )
     const screenSizeCheck = () => {
         if (window.innerWidth > breakpoints.mdUp) {
             setIsMobile(false)
@@ -70,7 +72,7 @@ const BookATime = ({ doctorId }) => {
         return (
             <Button
                 variant={
-                    selectedTimeId == buttonProps.timeId
+                    selectedTimeId === buttonProps.timeId
                         ? "contained"
                         : "outlined"
                 }
@@ -165,7 +167,7 @@ const BookATime = ({ doctorId }) => {
                     <Button
                         variant="contained"
                         onClick={() => {
-                            sectionId(PageNames.Home)
+                            updateBookingStage(BookingStages.ConfirmTime)
                         }}
                     >
                         Submit booking

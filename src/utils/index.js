@@ -38,3 +38,19 @@ export const makeId = (length) => {
     }
     return result
 }
+
+export const makeTable = (tableObject) => {
+    return (
+        <table>
+            {tableObject?.map((row) => {
+                return (
+                    <tr>
+                        {row?.map((cell) => {
+                            return <td>{cell.text}</td>
+                        })}
+                    </tr>
+                )
+            })}
+        </table>
+    )
+}
