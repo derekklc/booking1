@@ -10,6 +10,7 @@ import AboutUs from "../About"
 import Products from "../Products"
 import { PageNames } from "../../../constants"
 import ContactUs from "../Contact"
+import axios from "axios"
 
 import Facade from "../../molecules/Facade"
 
@@ -20,10 +21,19 @@ const renderFacade = () => {
     return <Facade />
 }
 
+const sendData = async () => {
+    console.log("clicked")
+    const newNote = {
+        title: "7PM",
+        content: "Content7PM",
+    }
+    await axios.post("http://localhost:3001/create", newNote)
+}
+
 const renderHome = () => {
     return (
         <S.ContentContainer>
-            <S.Title>HerbCure Medical</S.Title>
+            <S.Title onClick={sendData}>HerbCure Medical</S.Title>
             <S.LogoContainer>MyLogo</S.LogoContainer>
             <S.BGCircle />
             <HomeMenu />
