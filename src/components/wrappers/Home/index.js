@@ -1,84 +1,87 @@
-import React from "react"
-import { useReactiveVar } from "@apollo/client"
+import React from "react";
+import { useReactiveVar } from "@apollo/client";
 
-import * as S from "./home.styles"
-import { sectionId } from "../../../reactiveVariables"
+import * as S from "./home.styles";
+import { sectionId } from "../../../reactiveVariables";
 
-import HomeMenu from "../../organisms/HomeMenu"
-import Booking from "../Booking"
-import AboutUs from "../About"
-import Products from "../Products"
-import { PageNames } from "../../../constants"
-import ContactUs from "../Contact"
-import axios from "axios"
+import HomeMenu from "../../organisms/HomeMenu";
+import Booking from "../Booking";
+import AboutUs from "../About";
+import Products from "../Products";
+import { PageNames } from "../../../constants";
+import ContactUs from "../Contact";
+import axios from "axios";
 
-import Facade from "../../molecules/Facade"
+import Facade from "../../molecules/Facade";
 
 const renderFacade = () => {
-    setTimeout(() => {
-        sectionId(PageNames.Home)
-    }, 1800)
-    return <Facade />
-}
+  return (
+    <Facade
+      facadeClick={() => {
+        sectionId(PageNames.Home);
+      }}
+    />
+  );
+};
 
 const sendData = async () => {
-    console.log("clicked")
-    const newNote = {
-        title: "7PM",
-        content: "Content7PM",
-    }
-    await axios.post("http://localhost:3001/create", newNote)
-}
+  console.log("clicked");
+  const newNote = {
+    title: "7PM",
+    content: "Content7PM",
+  };
+  await axios.post("http://localhost:3001/create", newNote);
+};
 
 const renderHome = () => {
-    return (
-        <S.ContentContainer>
-            <S.Title onClick={sendData}>HerbCure Medical</S.Title>
-            <S.LogoContainer>MyLogo</S.LogoContainer>
-            <S.BGCircle />
-            <HomeMenu />
-        </S.ContentContainer>
-    )
-}
+  return (
+    <S.ContentContainer>
+      <S.Title onClick={sendData}>HerbCure Medical</S.Title>
+      <S.LogoContainer>MyLogo</S.LogoContainer>
+      <S.BGCircle />
+      <HomeMenu />
+    </S.ContentContainer>
+  );
+};
 
 const renderBooking = () => {
-    return <Booking />
-}
+  return <Booking />;
+};
 
 const renderAbout = () => {
-    return <AboutUs />
-}
+  return <AboutUs />;
+};
 
 const renderProducts = () => {
-    return <Products />
-}
+  return <Products />;
+};
 
 const renderContact = () => {
-    return <ContactUs />
-}
+  return <ContactUs />;
+};
 
 const Home = () => {
-    const currentSection = useReactiveVar(sectionId)
-    if (currentSection === PageNames.Start) {
-        return renderFacade()
-    }
-    if (!currentSection || currentSection === PageNames.Home) {
-        return renderHome()
-    }
-    if (currentSection === PageNames.Bookings) {
-        return renderBooking()
-    }
-    if (currentSection === PageNames.About) {
-        return renderAbout()
-    }
-    if (currentSection === PageNames.Products) {
-        return renderProducts()
-    }
-    if (currentSection === PageNames.Contact) {
-        return renderContact()
-    }
+  const currentSection = useReactiveVar(sectionId);
+  if (currentSection === PageNames.Start) {
+    return renderFacade();
+  }
+  if (!currentSection || currentSection === PageNames.Home) {
+    return renderHome();
+  }
+  if (currentSection === PageNames.Bookings) {
+    return renderBooking();
+  }
+  if (currentSection === PageNames.About) {
+    return renderAbout();
+  }
+  if (currentSection === PageNames.Products) {
+    return renderProducts();
+  }
+  if (currentSection === PageNames.Contact) {
+    return renderContact();
+  }
 
-    return renderHome()
-}
+  return renderHome();
+};
 
-export default Home
+export default Home;
