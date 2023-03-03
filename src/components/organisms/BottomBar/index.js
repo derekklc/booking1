@@ -39,7 +39,7 @@ const BottomBar = () => {
       icon: faCartPlus,
       label: "Cart",
       handleClick: () => {
-        sectionId(PageNames.Home)
+        sectionId(PageNames.Login)
       },
     },
 
@@ -47,7 +47,7 @@ const BottomBar = () => {
       icon: faMessage,
       label: "Messages",
       handleClick: () => {
-        sectionId(PageNames.Home)
+        sectionId(PageNames.SignUp)
       },
     },
 
