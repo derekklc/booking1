@@ -1,87 +1,118 @@
-import React from "react";
-import { useReactiveVar } from "@apollo/client";
+import React from "react"
+import { useReactiveVar } from "@apollo/client"
 
-import * as S from "./home.styles";
-import { sectionId } from "../../../reactiveVariables";
+import * as S from "./home.styles"
+import { sectionId } from "../../../reactiveVariables"
 
-import HomeMenu from "../../organisms/HomeMenu";
-import Booking from "../Booking";
-import AboutUs from "../About";
-import Products from "../Products";
-import { PageNames } from "../../../constants";
-import ContactUs from "../Contact";
-import axios from "axios";
+import HomeMenu from "../../organisms/HomeMenu"
+import Booking from "../Booking"
+import AboutUs from "../About"
+import Products from "../Products"
+import { PageNames } from "../../../constants"
+import ContactUs from "../Contact"
+import SignUp from "../SignUp"
+import BottomBar from "../../organisms/BottomBar"
+import axios from "axios"
 
-import Facade from "../../molecules/Facade";
+import Facade from "../../molecules/Facade"
+import Login from "../Login"
 
 const renderFacade = () => {
   return (
     <Facade
       facadeClick={() => {
-        sectionId(PageNames.Home);
+        sectionId(PageNames.Home)
       }}
     />
-  );
-};
+  )
+}
 
 const sendData = async () => {
-  console.log("clicked");
+  console.log("clicked")
   const newNote = {
     title: "7PM",
     content: "Content7PM",
-  };
-  await axios.post("http://localhost:3001/create", newNote);
-};
+  }
+  await axios.post("http://localhost:3001/create", newNote)
+}
+
+const goToSignUp = () => {
+  sectionId(PageNames.SignUp)
+}
 
 const renderHome = () => {
   return (
     <S.ContentContainer>
       <S.Title onClick={sendData}>HerbCure Medical</S.Title>
-      <S.LogoContainer>MyLogo</S.LogoContainer>
+      <S.LogoContainer onClick={goToSignUp}>MyLogo</S.LogoContainer>
       <S.BGCircle />
       <HomeMenu />
     </S.ContentContainer>
-  );
-};
+  )
+}
 
 const renderBooking = () => {
-  return <Booking />;
-};
+  return <Booking />
+}
 
 const renderAbout = () => {
-  return <AboutUs />;
-};
+  return <AboutUs />
+}
 
 const renderProducts = () => {
-  return <Products />;
-};
+  return <Products />
+}
 
 const renderContact = () => {
-  return <ContactUs />;
-};
+  return <ContactUs />
+}
 
-const Home = () => {
-  const currentSection = useReactiveVar(sectionId);
+const renderSignUp = () => {
+  return <SignUp />
+}
+
+const renderLogin = () => {
+  return <Login />
+}
+
+const RenderPages = ({ currentSection }) => {
   if (currentSection === PageNames.Start) {
-    return renderFacade();
+    return renderFacade()
   }
   if (!currentSection || currentSection === PageNames.Home) {
-    return renderHome();
+    return renderHome()
   }
   if (currentSection === PageNames.Bookings) {
-    return renderBooking();
+    return renderBooking()
   }
   if (currentSection === PageNames.About) {
-    return renderAbout();
+    return renderAbout()
   }
   if (currentSection === PageNames.Products) {
-    return renderProducts();
+    return renderProducts()
   }
   if (currentSection === PageNames.Contact) {
-    return renderContact();
+    return renderContact()
+  }
+  if (currentSection === PageNames.SignUp) {
+    return renderSignUp()
+  }
+  if (currentSection === PageNames.Login) {
+    return renderLogin()
   }
 
-  return renderHome();
-};
+  return renderHome()
+}
 
-export default Home;
+const Home = () => {
+  const currentSection = useReactiveVar(sectionId)
+  const showBottomBar = currentSection !== PageNames.Start
+  return (
+    <>
+      <RenderPages currentSection={currentSection} />
+      {showBottomBar && <BottomBar />}
+    </>
+  )
+}
+
+export default Home

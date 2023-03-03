@@ -1,3 +1,9 @@
+Recaptcha site key:
+6LexnswkAAAAAK5U_g5LbCgKPnByJWG76qA0pCuT
+
+Recaptcha secret key:
+6LexnswkAAAAAPWhA208JzH8JOKuk4YpDOzELk1o
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
