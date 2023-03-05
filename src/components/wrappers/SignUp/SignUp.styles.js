@@ -18,7 +18,7 @@ export const FormContainer = styled.div`
   align-items: center;
 `
 
-export const LoginButton = styled.div`
+export const LoginButton = styled.button`
   width: 100%;
   display: flex;
   justify-content: center;

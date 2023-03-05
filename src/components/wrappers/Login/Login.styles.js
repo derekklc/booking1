@@ -18,8 +18,7 @@ export const FormContainer = styled.div`
   align-items: center;
 `
 
-export const LoginButton = styled.div`
-  width: 100%;
+export const LoginButton = styled.button`
   display: flex;
   justify-content: center;
 `
@@ -38,4 +37,17 @@ export const Line = styled.div`
 
 export const CreateNewText = styled.p`
   margin: 0;
+`
+
+export const StatusBanner = styled.div`
+  padding: 14px 0;
+  ${({ theme }) =>
+    theme.status === "success"
+      ? ` background: lightgreen;
+    color: green;
+  `
+      : `
+    background: #e8c0c0;
+    color: red;
+  `}
 `
