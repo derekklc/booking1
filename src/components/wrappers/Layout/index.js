@@ -1,6 +1,5 @@
-// import Facade from "../../molecules/Facade"
 import HomePage from "../Home"
-// import Booking from "../Booking"
+import Booking from "../Booking"
 import AboutUs from "../About"
 import Products from "../Products"
 import { PageNames } from "../../../constants"
@@ -13,9 +12,9 @@ const renderHome = () => {
   return <HomePage />
 }
 
-// const renderBooking = () => {
-//   return <Booking />
-// }
+const renderBooking = () => {
+  return <Booking />
+}
 
 const renderAbout = () => {
   return <AboutUs />
@@ -38,9 +37,9 @@ const renderLogin = () => {
 }
 
 const RenderPages = ({ pageName }) => {
-  // if (pageName === PageNames.Bookings) {
-  //   return renderBooking()
-  // }
+  if (pageName === PageNames.Bookings) {
+    return renderBooking()
+  }
   if (pageName === PageNames.About) {
     return renderAbout()
   }
