@@ -1,4 +1,4 @@
-import { PageNames } from "tt/constants"
+import { PageNames } from "../constants"
 
 import Layout from "tt/components/wrappers/Layout"
 

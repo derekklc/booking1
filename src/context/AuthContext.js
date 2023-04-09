@@ -5,6 +5,7 @@ import {
   signInWithEmailAndPassword,
   signOut,
 } from "firebase/auth"
+import { useRouter } from "next/router"
 
 import { auth } from "tt/utils/fire"
 
@@ -15,6 +16,7 @@ export const useAuth = () => useContext(AuthContext)
 export const AuthContextProvider = ({ children }) => {
   const [user, setUser] = useState(null)
   const [loading, setLoading] = useState(true)
+  const router = useRouter()
 
   useEffect(() => {
     const unsubscribe = onAuthStateChanged(auth, (user) => {
@@ -26,6 +28,7 @@ export const AuthContextProvider = ({ children }) => {
         })
       } else {
         setUser(null)
+        router.push("./login")
       }
       setLoading(false)
     })
@@ -43,7 +46,7 @@ export const AuthContextProvider = ({ children }) => {
   }
 
   return (
-    <AuthContext.Provider value={{ user, login, signup, logout }}>
+    <AuthContext.Provider value={{ user, loading, login, signup, logout }}>
       {!loading && children}
     </AuthContext.Provider>
   )

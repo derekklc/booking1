@@ -38,11 +38,11 @@ const SignUp = () => {
       <S.FormContainer>
         <form onSubmit={handleSignup}>
           <div>
-            <label for="login-username">Username</label>
+            <label htmlFor="login-username">Username</label>
             <input id="login-username" type="email" ref={emailRef} />
           </div>
           <div>
-            <label for="login-password">Password</label>
+            <label htmlFor="login-password">Password</label>
             <input id="login-password" type="password" ref={passwordRef} />
           </div>
           <S.LoginButton>Sign up</S.LoginButton>

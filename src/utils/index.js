@@ -40,15 +40,19 @@ export const makeId = (length) => {
 export const makeTable = (tableObject) => {
   return (
     <table>
-      {tableObject?.map((row, index) => {
-        return (
-          <tr key={`table-row-${index}`}>
-            {row?.map((cell, index) => {
-              return <td key={`table-cell-${index}`}>{cell.text}</td>
-            })}
-          </tr>
-        )
-      })}
+      {tableObject && tableObject.length && (
+        <tbody>
+          {tableObject?.map((row, index) => {
+            return (
+              <tr key={`table-row-${index}`}>
+                {row?.map((cell, index) => {
+                  return <td key={`table-cell-${index}`}>{cell.text}</td>
+                })}
+              </tr>
+            )
+          })}
+        </tbody>
+      )}
     </table>
   )
 }

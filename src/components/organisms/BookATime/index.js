@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react"
 
 import TextField from "@mui/material/TextField"
+import Image from "next/image"
 
 import { LocalizationProvider } from "@mui/x-date-pickers/LocalizationProvider"
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs"
@@ -17,165 +18,161 @@ import { BookingStages } from "../../../constants"
 import * as S from "./BookATime.styles"
 
 const BookATime = ({
-    doctorId,
-    updateBookingStage,
-    selectedDate,
-    setSelectedDate,
-    selectedTimeId,
-    setSelectedTimeId,
+  doctorId,
+  updateBookingStage,
+  selectedDate,
+  setSelectedDate,
+  selectedTimeId,
+  setSelectedTimeId,
 }) => {
-    // dayjs("2015-08-18")
-    const initialIsMobile =
-        !!window?.innerWidth && window.innerWidth <= breakpoints.mdUp
-    const [isMobile, setIsMobile] = useState(initialIsMobile)
-    const handleChange = (newValue) => {
-        setSelectedDate(newValue)
-    }
+  // dayjs("2015-08-18")
+  const initialIsMobile =
+    !!window?.innerWidth && window.innerWidth <= breakpoints.mdUp
+  const [isMobile, setIsMobile] = useState(initialIsMobile)
+  const handleChange = (newValue) => {
+    setSelectedDate(newValue)
+  }
 
-    const doctorProfile = Doctors.find(
-        (person) => person.doctoreId === doctorId
+  const doctorProfile = Doctors.find((person) => person.doctoreId === doctorId)
+  const screenSizeCheck = () => {
+    if (window.innerWidth > breakpoints.mdUp) {
+      setIsMobile(false)
+    } else if (window.innerWidth <= breakpoints.mdUp) {
+      setIsMobile(true)
+    }
+  }
+  useEffect(() => {
+    window?.addEventListener("resize", screenSizeCheck)
+  })
+
+  const { doctorNameLabel, availabilityLabel } = BookingContent
+
+  const renderDatePicker = () => {
+    return isMobile ? (
+      <MobileDatePicker
+        label="Date mobile"
+        inputFormat="MM/DD/YYYY"
+        value={selectedDate}
+        onChange={handleChange}
+        renderInput={(params) => <TextField {...params} />}
+      />
+    ) : (
+      <DesktopDatePicker
+        label="Date desktop"
+        inputFormat="MM/DD/YYYY"
+        value={selectedDate}
+        onChange={handleChange}
+        renderInput={(params) => <TextField {...params} />}
+      />
     )
-    const screenSizeCheck = () => {
-        if (window.innerWidth > breakpoints.mdUp) {
-            setIsMobile(false)
-        } else if (window.innerWidth <= breakpoints.mdUp) {
-            setIsMobile(true)
-        }
-    }
-    useEffect(() => {
-        window?.addEventListener("resize", screenSizeCheck)
-    })
+  }
 
-    const { doctorNameLabel, availabilityLabel } = BookingContent
-
-    const renderDatePicker = () => {
-        return isMobile ? (
-            <MobileDatePicker
-                label="Date mobile"
-                inputFormat="MM/DD/YYYY"
-                value={selectedDate}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-            />
-        ) : (
-            <DesktopDatePicker
-                label="Date desktop"
-                inputFormat="MM/DD/YYYY"
-                value={selectedDate}
-                onChange={handleChange}
-                renderInput={(params) => <TextField {...params} />}
-            />
-        )
-    }
-
-    const SingleButton = (buttonProps) => {
-        return (
-            <Button
-                variant={
-                    selectedTimeId === buttonProps.timeId
-                        ? "contained"
-                        : "outlined"
-                }
-                onClick={() => {
-                    setSelectedTimeId(buttonProps.timeId)
-                }}
-                {...(buttonProps.disabled ? { disabled: true } : {})}
-            >
-                {buttonProps.label}
-            </Button>
-        )
-    }
-
-    const renderTimePicker = () => {
-        return (
-            <S.TimePickerContainer>
-                <S.PickerTitle>
-                    Select Time:{" "}
-                    <strong>(AEST - Australian Eastern Standard Time)</strong>
-                </S.PickerTitle>
-                <S.PickerSubTitle>Morning </S.PickerSubTitle>
-                <S.TimeStackContainer>
-                    <Stack direction="row" spacing={2}>
-                        {DayTimes.morning.map((item) => {
-                            return SingleButton(item)
-                        })}
-                    </Stack>
-                </S.TimeStackContainer>
-                <S.PickerSubTitle>Afternoon </S.PickerSubTitle>
-                <S.TimeStackContainer>
-                    <Stack direction="row" spacing={2}>
-                        {DayTimes.afternoon.map((item) => {
-                            return SingleButton(item)
-                        })}
-                    </Stack>
-                </S.TimeStackContainer>
-            </S.TimePickerContainer>
-        )
-    }
-
+  const SingleButton = (buttonProps) => {
     return (
-        <S.PageSection theme={{ hasPadding: true }}>
-            <S.BookingTitle>Select a time with your doctor</S.BookingTitle>
-            <S.PickerBodySection>
-                <S.DoctorProfile>
-                    <S.DoctorProfilePicture>
-                        <img src={doctorProfile.profile} />
-                    </S.DoctorProfilePicture>
-                    <S.DoctorTextSecion>
-                        <tr>
-                            <td>
-                                <S.DoctorInfoText
-                                    theme={{ isFirstColumn: true }}
-                                >
-                                    {doctorNameLabel}:{" "}
-                                </S.DoctorInfoText>
-                            </td>
-
-                            <td>
-                                <S.DoctorInfoText>
-                                    {doctorProfile.name}
-                                </S.DoctorInfoText>
-                            </td>
-                        </tr>
-                        <tr>
-                            <td>
-                                <S.DoctorInfoText
-                                    theme={{ isFirstColumn: true }}
-                                >
-                                    {availabilityLabel}:{" "}
-                                </S.DoctorInfoText>
-                            </td>
-
-                            <td>
-                                <S.DoctorInfoText>
-                                    {doctorProfile.details}
-                                </S.DoctorInfoText>
-                            </td>
-                        </tr>
-                    </S.DoctorTextSecion>
-                </S.DoctorProfile>
-                <S.DivisionLine />
-                <S.DatePickerContainer>
-                    <S.PickerTitle>Select Date:</S.PickerTitle>
-                    <LocalizationProvider dateAdapter={AdapterDayjs}>
-                        {renderDatePicker()}
-                    </LocalizationProvider>
-                </S.DatePickerContainer>
-                <S.DivisionLine />
-                {renderTimePicker()}
-                <S.SubmitButton>
-                    <Button
-                        variant="contained"
-                        onClick={() => {
-                            updateBookingStage(BookingStages.ConfirmTime)
-                        }}
-                    >
-                        Submit booking
-                    </Button>
-                </S.SubmitButton>
-            </S.PickerBodySection>
-        </S.PageSection>
+      <Button
+        variant={
+          selectedTimeId === buttonProps.timeId ? "contained" : "outlined"
+        }
+        onClick={() => {
+          setSelectedTimeId(buttonProps.timeId)
+        }}
+        key={`time-picker-button-${buttonProps.index || "0"}`}
+        {...(buttonProps.disabled ? { disabled: true } : {})}
+      >
+        {buttonProps.label}
+      </Button>
     )
+  }
+
+  const renderTimePicker = () => {
+    return (
+      <S.TimePickerContainer>
+        <S.PickerTitle>
+          Select Time:{" "}
+          <strong>(AEST - Australian Eastern Standard Time)</strong>
+        </S.PickerTitle>
+        <S.PickerSubTitle>Morning </S.PickerSubTitle>
+        <S.TimeStackContainer>
+          <Stack direction="row" spacing={2}>
+            {DayTimes.morning.map((item, index) => {
+              return SingleButton({ ...item, index })
+            })}
+          </Stack>
+        </S.TimeStackContainer>
+        <S.PickerSubTitle>Afternoon </S.PickerSubTitle>
+        <S.TimeStackContainer>
+          <Stack direction="row" spacing={2}>
+            {DayTimes.afternoon.map((item, index) => {
+              return SingleButton({ ...item, index })
+            })}
+          </Stack>
+        </S.TimeStackContainer>
+      </S.TimePickerContainer>
+    )
+  }
+
+  return (
+    <S.PageSection theme={{ hasPadding: true }}>
+      <S.BookingTitle>Select a time with your doctor</S.BookingTitle>
+      <S.PickerBodySection>
+        <S.DoctorProfile>
+          <S.DoctorProfilePicture>
+            <Image
+              src={doctorProfile.profile}
+              alt="doctor profile image"
+              width={100}
+              height={100}
+            />
+          </S.DoctorProfilePicture>
+          <S.DoctorTextSecion>
+            <tbody>
+              <tr>
+                <td>
+                  <S.DoctorInfoText theme={{ isFirstColumn: true }}>
+                    {doctorNameLabel}:{" "}
+                  </S.DoctorInfoText>
+                </td>
+
+                <td>
+                  <S.DoctorInfoText>{doctorProfile.name}</S.DoctorInfoText>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <S.DoctorInfoText theme={{ isFirstColumn: true }}>
+                    {availabilityLabel}:{" "}
+                  </S.DoctorInfoText>
+                </td>
+
+                <td>
+                  <S.DoctorInfoText>{doctorProfile.details}</S.DoctorInfoText>
+                </td>
+              </tr>
+            </tbody>
+          </S.DoctorTextSecion>
+        </S.DoctorProfile>
+        <S.DivisionLine />
+        <S.DatePickerContainer>
+          <S.PickerTitle>Select Date:</S.PickerTitle>
+          <LocalizationProvider dateAdapter={AdapterDayjs}>
+            {renderDatePicker()}
+          </LocalizationProvider>
+        </S.DatePickerContainer>
+        <S.DivisionLine />
+        {renderTimePicker()}
+        <S.SubmitButton>
+          <Button
+            variant="contained"
+            onClick={() => {
+              updateBookingStage(BookingStages.ConfirmTime)
+            }}
+          >
+            Submit booking
+          </Button>
+        </S.SubmitButton>
+      </S.PickerBodySection>
+    </S.PageSection>
+  )
 }
 
 export default BookATime

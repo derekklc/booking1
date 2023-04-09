@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react"
 
+import Image from "next/image"
+
 import * as S from "./products.styles"
 
 import PageHeaderA from "../../molecules/PageHeaderA"
@@ -13,7 +15,12 @@ const renderProductList = (products) => {
           <S.ProductNode key={`products-${item.name}-${index}`}>
             <div>{item.name}</div>
             <S.ProductImage>
-              <img src={item.image} />
+              <Image
+                src={item.image}
+                alt="product image"
+                width={100}
+                height={100}
+              />
             </S.ProductImage>
             <S.ProductName>{item.name}</S.ProductName>
             <S.ProductDescription>{item.description}</S.ProductDescription>

@@ -18,11 +18,6 @@ export const FormContainer = styled.div`
   align-items: center;
 `
 
-export const LoginButton = styled.button`
-  display: flex;
-  justify-content: center;
-`
-
 export const CreateNew = styled.div`
   display: grid;
   grid-template-columns: auto fit-content auto;
@@ -37,6 +32,9 @@ export const Line = styled.div`
 
 export const CreateNewText = styled.p`
   margin: 0;
+  button {
+    color: white;
+  }
 `
 
 export const StatusBanner = styled.div`
