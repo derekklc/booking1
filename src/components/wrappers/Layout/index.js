@@ -59,11 +59,13 @@ const RenderPages = ({ pageName }) => {
   return renderHome()
 }
 
+const bottomBarExemption = [PageNames.SignUp, PageNames.Login]
+
 const Layout = ({ pageName }) => {
   return (
     <div>
       {RenderPages({ pageName })}
-      <BottomBar />
+      {!bottomBarExemption.includes(pageName) && <BottomBar />}
     </div>
   )
 }
